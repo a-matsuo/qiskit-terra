@@ -264,10 +264,10 @@ class GroverOperator(QuantumCircuit):
 # TODO use the oracle compiler or the bit string oracle
 def _zero_reflection(num_state_qubits: int, qubits: List[int], mcx_mode: Optional[str] = None
                      ) -> QuantumCircuit:
-    qr_state = QuantumRegister(num_state_qubits, 'state')
+    qr_state = QuantumRegister(len(qubits), 'state')
     reflection = QuantumCircuit(qr_state, name='S_0')
 
-    num_ancillas = MCXGate.get_num_ancilla_qubits(num_state_qubits - 1, mcx_mode)
+    num_ancillas = MCXGate.get_num_ancilla_qubits(len(qubits) - 1, mcx_mode)
     if num_ancillas > 0:
         qr_ancilla = AncillaRegister(num_ancillas, 'ancilla')
         reflection.add_register(qr_ancilla)
